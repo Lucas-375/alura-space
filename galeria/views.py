@@ -19,3 +19,24 @@ def buscar(request):
             fotografias = fotografias.filter(nome__icontains=nome_a_buscar)
     
     return render(request, 'galeria/buscar.html', {'cards':fotografias})
+
+def categoria(request):
+    fotografias = Fotografia.objects.order_by('-data_fotografia').filter(publicada=True)
+
+    if ('nebulosa_bool' in request.GET and 
+        request.GET['nebulosa_bool'] == 'true'):
+        fotografias = fotografias.filter(categoria='NEBULOSA')
+
+    elif ('estrela_bool' in request.GET and
+        request.GET['estrela_bool'] == 'true'):
+        fotografias = fotografias.filter(categoria='ESTRELA')
+
+    elif ('galaxia_bool' in request.GET and
+        request.GET['galaxia_bool'] == 'true'):
+        fotografias = fotografias.filter(categoria='GALÁXIA')
+
+    elif ('planeta_bool' in request.GET and
+        request.GET['planeta_bool'] == 'true'):
+        fotografias = fotografias.filter(categoria='PLANETA')         
+
+    return render(request, 'galeria/categoria.html', {'cards':fotografias})
