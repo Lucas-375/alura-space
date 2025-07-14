@@ -21,7 +21,7 @@
         <header class="cabecalho">
             <img src="{% static '/assets/logo/Logo(2).png' %}" alt="Logo da Alura Space" />
             
-            {% include 'usuarios/partials/_alertas.html' %}
+            {% include 'partials/_alertas.html' %}
 
             <div class="cabecalho__busca">
                 <div class="busca__fundo">
@@ -54,7 +54,7 @@
                         </div>
                         {% endfor %}                    
                         <div>
-                            <button type="submit" class="btn btn-success col-12" style="padding: top 5px;">Cadastrar</button>
+                            <button type="submit" class="btn btn-success col-12" style="padding: top 5px;">Logar</button>
                         </div>    
                     </div>
                 </form>
@@ -62,3 +62,5 @@
         </main>
     </div>
 </body>
+
+{% include 'partials/_footer.html' %}
