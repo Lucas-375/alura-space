@@ -82,11 +82,19 @@ class CadastroForms(forms.Form):
                 return nome
 
     def clean_senha_2(self):      
-        senha_1 = self.cleaned_data.get('senha_1')
-        senha_2 = self.cleaned_data.get('senha_2')
+        senha_1 = str(self.cleaned_data.get('senha_1'))
+        senha_2 = str(self.cleaned_data.get('senha_2'))
 
         if senha_1 and senha_2:
+            import string
+
             if senha_1 != senha_2:
                 raise forms.ValidationError('As senhas nao são iguais')
+            if not any(c.isalpha() for c in senha_2):
+                raise forms.ValidationError('A senha deve conter ao menos uma letra')
+            if not any(c.isdigit() for c in senha_2):
+                raise forms.ValidationError('A senha deve conter ao menos um número')
+            if not any(c in string.punctuation for c in senha_2):
+                raise forms.ValidationError('A senha deve conter ao menos um símbolo')
             else:
                 return senha_2
