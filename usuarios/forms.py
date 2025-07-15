@@ -77,7 +77,7 @@ class CadastroForms(forms.Form):
         if nome:
             nome = nome.strip()
             if ' ' in nome:
-                raise forms.ValidationError('Espaços são invalidos no nesse campo')    
+                raise forms.ValidationError('Espaços são invalidos no nesse campo', code='warning')    
             else:
                 return nome
 
@@ -91,10 +91,10 @@ class CadastroForms(forms.Form):
             if senha_1 != senha_2:
                 raise forms.ValidationError('As senhas nao são iguais')
             if not any(c.isalpha() for c in senha_2):
-                raise forms.ValidationError('A senha deve conter ao menos uma letra')
+                raise forms.ValidationError('A senha deve conter ao menos uma letra', code='warning')
             if not any(c.isdigit() for c in senha_2):
-                raise forms.ValidationError('A senha deve conter ao menos um número')
+                raise forms.ValidationError('A senha deve conter ao menos um número', code='warning')
             if not any(c in string.punctuation for c in senha_2):
-                raise forms.ValidationError('A senha deve conter ao menos um símbolo')
+                raise forms.ValidationError('A senha deve conter ao menos um símbolo', code='warning')
             else:
                 return senha_2
